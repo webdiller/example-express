@@ -13,19 +13,14 @@ app.use(express.static(path.resolve(__dirname, "static")));
 app.use(express.json());
 
 /* API */
+app.use("/", (req, res) => res.send("Hello basic route"));
 app.use("/api/v1/example", exampleRoute);
 
 /** Старт сервака */
-(()=>{
-  if (process.env.NODE_ENV === "development") {
-    app.listen(process.env.DEVELOPMENT_SITE_PORT, async () => {
-      console.log(`Listening development listening at http://localhost:${process.env.DEVELOPMENT_SITE_PORT}`);
-    });
-  }
-
-  if (process.env.NODE_ENV === "production") {
-    app.listen(process.env.PRODUCTION_SITE_PORT, async () => {
-      console.log(`Listening production at http://localhost:${process.env.PRODUCTION_SITE_PORT}`);
-    });
-  }
-})()
+(() => {
+  app.listen(5003, async () => {
+    console.log(
+      `Listening development listening at http://localhost:5003`
+    );
+  });
+})();
